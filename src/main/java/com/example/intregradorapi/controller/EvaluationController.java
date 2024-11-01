@@ -1,2 +1,43 @@
-package com.example.intregradorapi.controller;public class EvaluationController {
+package com.example.intregradorapi.controller;
+
+import com.example.intregradorapi.entity.Evaluation;
+import com.example.intregradorapi.repository.EvaluationRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
+
+@RestController
+@CrossOrigin(maxAge = 3600)
+public class EvaluationController {
+
+    @Autowired
+    private EvaluationRepository evaluationRepository;
+
+    //El navegador pide la muestra para graficarla
+    //http://localhost:8080/evaluation/11
+    @GetMapping("evaluation/{id}")
+    public ResponseEntity<?> getEvaluationById(@PathVariable("id") long id){
+        var evaluation = evaluationRepository.findById(id);
+        if(evaluation.isPresent()){
+            return ResponseEntity.status(200).body(evaluation.get());
+        }else{
+            var response = new HashMap<String, String>();
+            response.put("message", "La muestra no se encontró");
+            return ResponseEntity.status(404).body(response);
+        }
+
+    }
+
+    //El Controlador envia datos a este endpoint
+    @PostMapping("evaluation")
+    public ResponseEntity<?> addEvaluation(@RequestBody Evaluation evaluation){
+        evaluationRepository.save(evaluation);
+
+        var response = new HashMap<String, String>();
+        response.put("message", "Operacion realizada");
+        return ResponseEntity.status(200).body(response);
+    }
+
 }

@@ -1,9 +1,19 @@
 package com.example.intregradorapi.entity;
 
+import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
+import jakarta.persistence.*;
+import org.hibernate.annotations.Type;
 
-public class Evalutation {
+@Entity
+@Table(name = "evaluation")
+public class Evaluation {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
+
+    @Type(JsonBinaryType.class)  // Usa el tipo JSONB de hibernate-types
+    @Column(columnDefinition = "jsonb")
     private Readings readings;
 
     public long getId() {
