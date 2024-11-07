@@ -28,7 +28,6 @@ public class UserController {
 
     @GetMapping("users/list")
     public ResponseEntity<?> listUsers(@RequestHeader("Authorization") String authorization) {
-        //Bearer TOKEN
         if(authorization.startsWith("Bearer ")){
             var token = authorization.substring(7);
             try {
