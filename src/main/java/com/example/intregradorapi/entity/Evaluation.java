@@ -16,6 +16,18 @@ public class Evaluation {
     @Column(columnDefinition = "jsonb")
     private Readings readings;
 
+
+    @OneToOne(mappedBy = "evaluation")
+    private TestInfo testInfo ;
+
+    public TestInfo getTestInfo() {
+        return testInfo;
+    }
+
+    public void setTestInfo(TestInfo testInfo) {
+        this.testInfo = testInfo;
+    }
+
     public long getId() {
         return id;
     }
