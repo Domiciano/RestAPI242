@@ -1,6 +1,7 @@
 package com.example.intregradorapi.controller;
 
 import com.example.intregradorapi.entity.Evaluation;
+import com.example.intregradorapi.entity.TestInfo;
 import com.example.intregradorapi.repository.EvaluationRepository;
 import com.example.intregradorapi.repository.PatientRepository;
 import com.example.intregradorapi.repository.TestInfoRepository;
@@ -34,14 +35,15 @@ public class EvaluationController {
             response.put("message", "La muestra no se encontró");
             return ResponseEntity.status(404).body(response);
         }
-
     }
 
     //El Controlador envia datos a este endpoint
     @PostMapping("evaluation")
     public ResponseEntity<?> addEvaluation(@RequestBody Evaluation evaluation){
+        var testinfo = new TestInfo();
+        testinfo.setId(10);
+        evaluation.setTestInfo(testinfo);
         evaluationRepository.save(evaluation);
-
         var response = new HashMap<String, String>();
         response.put("message", "Operacion realizada");
         return ResponseEntity.status(200).body(response);

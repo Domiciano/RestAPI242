@@ -21,7 +21,7 @@ public class TestInfo {
     @JoinColumn(name = "patientID")
     private Patient patient;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "testInfo")
     private Evaluation evaluation;
 
 
