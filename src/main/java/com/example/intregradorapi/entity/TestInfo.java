@@ -11,6 +11,7 @@ import java.util.List;
 public class TestInfo {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
     private Date date;
@@ -20,8 +21,7 @@ public class TestInfo {
     @JoinColumn(name = "patientID")
     private Patient patient;
 
-    @OneToOne
-    @JoinColumn(name = "evaluationID")
+    @OneToOne(cascade = CascadeType.ALL)
     private Evaluation evaluation;
 
 

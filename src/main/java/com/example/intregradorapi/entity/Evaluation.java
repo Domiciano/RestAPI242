@@ -17,7 +17,8 @@ public class Evaluation {
     private Readings readings;
 
 
-    @OneToOne(mappedBy = "evaluation")
+    @OneToOne(mappedBy = "evaluation", cascade = CascadeType.ALL)
+    @JoinColumn(name = "evaluationID")
     private TestInfo testInfo ;
 
     public TestInfo getTestInfo() {

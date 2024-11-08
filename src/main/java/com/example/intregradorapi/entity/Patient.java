@@ -23,7 +23,7 @@ public class Patient {
         this.natID = natID;
     }
 
-    @OneToMany(mappedBy = "patient")
+    @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL)
     private List<TestInfo> testInfos;
 
     public long getId() {
