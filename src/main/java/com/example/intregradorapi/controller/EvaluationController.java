@@ -5,9 +5,14 @@ import com.example.intregradorapi.repository.EvaluationRepository;
 import com.example.intregradorapi.repository.PatientRepository;
 import com.example.intregradorapi.repository.TestInfoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
+import java.io.IOException;
 import java.util.HashMap;
 
 @RestController
@@ -43,13 +48,12 @@ public class EvaluationController {
     }
 
 
+
+    //Elementos no probados
     @Autowired
     PatientRepository patientRepository;
-
     @Autowired
     TestInfoRepository testInfoRepository;
-
-
     public void get(){
         //Adquirir un paciente
         var optPatient = patientRepository.findByNatID("11438439423");
